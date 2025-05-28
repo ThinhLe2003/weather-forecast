@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tra cứu thời tiết</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <!-- Loading Spinner -->
+  <div id="loading-spinner">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- Greeting message -->
+  <div id="greeting-message" class="greeting"></div>
+
+  <!-- Main weather container -->
+  <div class="weather-container">
+    <h1>Tra cứu thời tiết</h1>
+    <input type="text" id="city-input" list="city-options" placeholder="Nhập tên thành phố" autocomplete="off" />
+    <datalist id="city-options"></datalist>
+    <button id="get-weather">Xem thời tiết</button>
+    <p id="error-message" style="color:red; display:none;"></p>
+
+    <!-- Weather result -->
+    <div class="weather-result" id="weather-result">
+      <h2 id="city-name">
+        <span id="location-icon" style="display: none;">📍</span>
+        <span id="city-text"></span>
+      </h2>
+      <img id="weather-icon" src="" alt="Biểu tượng thời tiết" style="display: none;" />
+      <p>Nhiệt độ: <span id="temp"></span>°C</p>
+      <p>Trạng thái: <span id="desc"></span></p>
+      <p>Độ ẩm: <span id="humidity"></span>%</p>
+      <p>Thời gian hiện tại: <span id="local-time"></span></p>
+    </div>
+  </div>
+
+  <!-- Weather canvas effects -->
+  <div id="weather-effect"></div>
+  <canvas id="weatherCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;"></canvas>
+
+  <!-- JavaScript -->
+  <script src="./script.js"></script>
+</body>
+</html>

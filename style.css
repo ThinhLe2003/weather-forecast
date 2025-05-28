@@ -1,0 +1,264 @@
+/* ==== Reset & Base ==== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding: 50px 15px 20px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('./VietNam.jpg');
+  background-attachment: fixed;
+  min-height: 100vh;
+  transition: background-image 1s ease-in-out;
+  image-rendering: auto;
+}
+
+/* ==== Container ==== */
+.weather-container {
+  background: rgba(255, 255, 255, 0.88);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  animation: fadeInUp 0.8s ease-in-out;
+  position: relative;
+}
+
+/* ==== Input & Button ==== */
+input, button {
+  margin: 10px 0;
+  padding: 12px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #3a86ff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #265ecf;
+}
+
+input:focus, button:focus {
+  outline: 2px solid #3a86ff;
+  outline-offset: 2px;
+}
+
+/* ==== Weather Result ==== */
+.weather-result {
+  opacity: 0;
+  transition: opacity 1s ease;
+  margin-top: 20px;
+}
+
+.weather-result.show {
+  opacity: 1;
+}
+
+#weather-icon {
+  width: 80px;
+  height: 80px;
+  margin: 10px auto;
+  display: block;
+}
+
+/* ==== Autocomplete Suggestions ==== */
+#suggestions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+}
+
+#suggestions li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+#suggestions li:hover {
+  background-color: #f0f0f0;
+}
+
+/* ==== Animation ==== */
+@keyframes fadeInUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ==== Responsive ==== */
+@media (max-width: 480px) {
+  .weather-container {
+    padding: 20px;
+  }
+
+  input, button {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  .greeting {
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+
+  #weather-icon {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* ==== Weather Effect Layer ==== */
+#weather-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* Rain Effect */
+.rain::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://i.imgur.com/NM7xCq8.png');
+  animation: rainDrop 0.5s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes rainDrop {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100%; }
+}
+
+/* Snow Effect */
+.snow::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://i.imgur.com/NkYzjL2.png');
+  animation: snowFall 3s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes snowFall {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100%; }
+}
+
+/* Sun Effect */
+.sun::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(255, 223, 0, 0.3), transparent 70%);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.2); opacity: 0.6; }
+}
+
+/* ==== Loading Spinner ==== */
+#loading-spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  flex-direction: column;
+}
+
+.loading-spinner {
+  border: 6px solid #ccc;
+  border-top: 6px solid #333;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==== Greeting ==== */
+.greeting {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  color: #333;
+  padding: 12px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  font-size: 18px;
+  font-family: 'Courier New', monospace;
+  z-index: 9999;
+  white-space: nowrap;
+}
+
+/* Optional typing effect for greeting */
+.greeting.typing-effect {
+  overflow: hidden;
+  border-right: 2px solid #333;
+  white-space: nowrap;
+  width: 0;
+  animation:
+    typing 3s steps(30, end) forwards,
+    blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 460px }
+}
+
+@keyframes blink-caret {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: #333; }
+}
+#error-message {
+  font-size: 14px;
+  color: red;
+  margin-top: 5px;
+  display: none;
+}
+
